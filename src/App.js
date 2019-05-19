@@ -7,14 +7,14 @@ import { push } from 'connected-react-router'
 class App extends Component {
 
     componentDidMount(){
-        this.props.onGetDiskSources(this.props.state.router.location.pathname);
+        this.props.onGetDiskSources(this.props.router.location.pathname);
     }
 
     render() {
         return(
             <div>
-                {breadCrumbs(this.props.state.breadCrumbs,this.props.onGetDiskSources,this.props)}
-                {sourceList(this.props.state.diskSources,this.props.onGetDiskSources)}
+                {breadCrumbs(this.props.breadCrumbs,this.props.onGetDiskSources)}
+                {sourceList(this.props.diskSources,this.props.onGetDiskSources)}
             </div>
         )
     }
@@ -22,7 +22,9 @@ class App extends Component {
 
 export default connect(
     state=>({
-        state:state
+        breadCrumbs:state.breadCrumbs,
+        diskSources:state.diskSources,
+        router:state.router
     }),
     dispatch=>({
         onGetDiskSources:(path)=>{
